@@ -4,10 +4,11 @@
 Images are 1024x1024
 Make sure to change the directory where the source images are and the diagnoses(label) we're looking for.
 
+WIP: exporting the model and getting the Golang piece to run inference - Doesn't seem to work on Windows
 ## Requirements
 - Python 3.5+
 - Tensorflow (compiled with CUDA 9.0 and CuDNN 7.0.5)
-- Pandas, PIL
+- Pandas, PIL, pydot, [graphviz](https://graphviz.gitlab.io)
 
 # 1. Binary Classification
 - classifies whether or not there is a problem identified in the scan

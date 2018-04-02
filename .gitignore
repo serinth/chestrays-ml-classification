@@ -2,3 +2,4 @@ source/*
 test/*
 train/*
 .ipynb_checkpoints
+myModel
