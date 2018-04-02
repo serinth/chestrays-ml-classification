@@ -1,10 +1,32 @@
-# Sample Convolutional NN to classify chest X-Rays
+# Sample Convolutional NN to classify chest X-Rays & Run inference in Golang
 
 2 classification examples on 150GB of data (in the reference link).
 Images are 1024x1024
 Make sure to change the directory where the source images are and the diagnoses(label) we're looking for.
 
-WIP: exporting the model and getting the Golang piece to run inference - Doesn't seem to work on Windows
+Different input and output tensor names can be generated while running the example. 
+Make sure to display all the node names and find the input layer and output layer to run inference in Go.
+
+This can be done with:
+```python
+[n.name for n in tf.get_default_graph().as_graph_def().node]
+```
+
+You should see this kind of output in Go if the model was run successfully:
+```bash
+(ML) tony@tony-nuc:$GOPATH/src/github.com/serinth/chestrays-ml-classification$ go run main.go
+2018-04-02 20:30:51.905087: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2018-04-02 20:30:51.905281: I tensorflow/cc/saved_model/loader.cc:240] Loading SavedModel with tags: { myTag }; from: myModel
+2018-04-02 20:30:51.913855: I tensorflow/cc/saved_model/loader.cc:159] Restoring SavedModel bundle.
+2018-04-02 20:30:52.121236: I tensorflow/cc/saved_model/loader.cc:194] Running LegacyInitOp on SavedModel bundle.
+2018-04-02 20:30:52.122132: I tensorflow/cc/saved_model/loader.cc:289] SavedModel load for tags { myTag }; Status: success. Took 216855 microseconds.
+Result value: [[0.5441803]] 
+```
+
+`myModel` is the folder with the binary protobuf model saved
+`myTag` is the TF tagged model
+
+
 ## Requirements
 - Python 3.5+
 - Tensorflow (compiled with CUDA 9.0 and CuDNN 7.0.5)
